@@ -12,6 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { EquipmentsModule } from './equipments/equipments.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { EquipmentsModule } from './equipments/equipments.module';
     UsersModule,
     AuthModule,
     EquipmentsModule,
+    ReportsModule,
   ],
   providers: [AppResolver, AppService],
 })

@@ -36,7 +36,9 @@ export class EquipmentsService {
 
   async findAll(): Promise<Equipment[]> {
     try {
-      return await this.equipmentRepository.find();
+      return await this.equipmentRepository.find({
+        relations: ['reports'],
+      });
     } catch (error) {
       this.logger.error(error);
     }
@@ -44,9 +46,7 @@ export class EquipmentsService {
 
   async findOneEquipment(id: string): Promise<EquipmentOutput> {
     try {
-      const equipment = await this.equipmentRepository.findOne({
-        where: { id },
-      });
+      const equipment = await this.findOne(id);
       if (!equipment) {
         throw new NotFoundException('User not found');
       }
@@ -108,6 +108,7 @@ export class EquipmentsService {
   async findOne(id: string) {
     const equipment = await this.equipmentRepository.findOne({
       where: { id },
+      relations: ['reports'],
     });
     if (!equipment) {
       throw new NotFoundException('Equipment not found');

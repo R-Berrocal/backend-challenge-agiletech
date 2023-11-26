@@ -42,3 +42,10 @@ create equipment admin:
 
 get Equipments and getEquipment:
 ![Alt text](evidences/image-8.png)
+
+Reports:
+
+create report only admins and technicians:
+![Alt text](evidences/image-9.png)
+get Report only admins and technicians:
+![Alt text](evidences/image-10.png)

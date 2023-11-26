@@ -2,6 +2,35 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Equipment {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  description: String
+  category: String
+  stock: Float!
+  imageUrl: String
+  reports: [Report!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Report {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  code: String!
+  description: String!
+  equipment: Equipment!
+  user: User!
+}
+
 type User {
   id: ID!
   createdAt: DateTime!
@@ -12,12 +41,8 @@ type User {
   email: String!
   password: String!
   role: UserRole!
+  reports: [Report!]!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 enum UserRole {
   CLIENT
@@ -36,22 +61,16 @@ type AuthResponse {
   user: User!
 }
 
-type Equipment {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
-  name: String!
-  description: String
-  category: String
-  stock: Float!
-  imageUrl: String
-}
-
 type EquipmentOutput {
   error: String
   ok: Boolean!
   equipment: Equipment
+}
+
+type ReportOutput {
+  error: String
+  ok: Boolean!
+  report: Report
 }
 
 type Query {
@@ -61,6 +80,8 @@ type Query {
   revalidateToken: AuthResponse!
   getEquipments: [Equipment!]!
   getEquipment(id: String!): EquipmentOutput!
+  getReports: [Report!]!
+  getReport(id: ID!): ReportOutput!
 }
 
 type Mutation {
@@ -72,6 +93,9 @@ type Mutation {
   createEquipment(input: CreateEquipmentInput!): EquipmentOutput!
   updateEquipment(input: UpdateEquipmentInput!): EquipmentOutput!
   removeEquipment(id: ID!): EquipmentOutput!
+  createReport(input: CreateReportInput!): ReportOutput!
+  updateReport(updateReportInput: UpdateReportInput!): ReportOutput!
+  removeReport(id: ID!): ReportOutput!
 }
 
 input CreateUserInput {
@@ -118,5 +142,20 @@ input UpdateEquipmentInput {
   category: String
   stock: Int
   imageUrl: String
+  id: ID!
+}
+
+input CreateReportInput {
+  code: String!
+  description: String!
+  equipmentId: String!
+  userId: String!
+}
+
+input UpdateReportInput {
+  code: String
+  description: String
+  equipmentId: String
+  userId: String
   id: ID!
 }

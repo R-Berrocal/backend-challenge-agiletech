@@ -1,6 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import { Report } from 'src/reports/entities/report.entity';
 
 @ObjectType()
 @Entity()
@@ -24,4 +25,8 @@ export class Equipment extends CoreEntity {
   @Field(() => String, { nullable: true })
   @Column({ type: 'varchar', nullable: true })
   imageUrl?: string;
+
+  @Field(() => [Report])
+  @OneToMany(() => Report, (report) => report.equipment)
+  reports: Report;
 }
