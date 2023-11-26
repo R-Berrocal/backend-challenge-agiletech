@@ -31,16 +31,24 @@ type UserOutput {
   user: User
 }
 
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
 type Query {
   getHello: String!
   getUsers: [User!]!
   getUser(id: ID!): UserOutput!
+  revalidateToken: AuthResponse!
 }
 
 type Mutation {
   createUser(input: CreateUserInput!): UserOutput!
   updateUser(input: UpdateUserInput!): UserOutput!
   removeUser(id: ID!): UserOutput!
+  signup(signupInput: SignupInput!): AuthResponse!
+  login(loginInput: LoginInput!): AuthResponse!
 }
 
 input CreateUserInput {
@@ -58,4 +66,17 @@ input UpdateUserInput {
   password: String
   role: UserRole
   id: ID!
+}
+
+input SignupInput {
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: UserRole
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }

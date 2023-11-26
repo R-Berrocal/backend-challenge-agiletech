@@ -73,14 +73,13 @@ export class UsersService {
         10,
       );
     }
-
-    await this.findOne(id);
     try {
       const user = await this.usersRepository.preload({
         id,
         ...updateUserInput,
       });
 
+      await this.usersRepository.save(user);
       return {
         ok: true,
         user,
@@ -108,6 +107,14 @@ export class UsersService {
         ok: false,
         error: error.message,
       };
+    }
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    try {
+      return await this.usersRepository.findOneByOrFail({ email });
+    } catch (error) {
+      throw new NotFoundException(`${email} not found`);
     }
   }
 }

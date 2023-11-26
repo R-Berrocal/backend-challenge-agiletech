@@ -1,11 +1,9 @@
-import { InputType, Field, ObjectType } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsEnum, IsEmail } from 'class-validator';
-import { CoreOutput } from 'src/common/dto/core.output';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
 import { UserRole } from 'src/enums/user-role.enum';
-import { User } from '../entities/user.entity';
 
 @InputType()
-export class CreateUserInput {
+export class SignupInput {
   @Field(() => String)
   @IsNotEmpty()
   name: string;
@@ -27,10 +25,4 @@ export class CreateUserInput {
   @IsEnum(UserRole)
   @IsOptional()
   role?: UserRole;
-}
-
-@ObjectType()
-export class UserOutput extends CoreOutput {
-  @Field(() => User, { nullable: true })
-  user?: User;
 }

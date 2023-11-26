@@ -9,6 +9,7 @@ import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { UsersModule } from './users/users.module';
       // synchronize: EnvConfiguration().environment === 'dev',
     }),
     UsersModule,
+    AuthModule,
   ],
   providers: [AppResolver, AppService],
 })
