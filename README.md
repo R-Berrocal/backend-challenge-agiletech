@@ -6,10 +6,14 @@
 
 Sigue estos pasos para levantar el proyecto:
 
-1. Inicia XAMPP y asegúrate de que los servicios de Apache y MySQL estén activos.
-2. Abre tu navegador web y ve a la siguiente URL: `http://localhost/final-project`.
+**Paso 1: correr el docker compose con el siguiente comando:**
+```
+docker compose up --build
+```
 
-¡Listo! Ahora deberías poder acceder al proyecto final del módulo 2 del diplomado.
+**Paso 2: Abre tu navegador web y ve a la siguiente URL: `http://localhost:3000/graphql`**
+
+¡Listo! Ahora deberías poder acceder a la prueba tecnica agiletech.
 
 ## Evidences:
 
