@@ -2,6 +2,60 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: UserRole!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum UserRole {
+  CLIENT
+  TECHNICIAN
+  ADMIN
+}
+
+type UserOutput {
+  error: String
+  ok: Boolean!
+  user: User
+}
+
 type Query {
   getHello: String!
+  getUsers: [User!]!
+  getUser(id: ID!): UserOutput!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): UserOutput!
+  updateUser(input: UpdateUserInput!): UserOutput!
+  removeUser(id: ID!): UserOutput!
+}
+
+input CreateUserInput {
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: UserRole
+}
+
+input UpdateUserInput {
+  name: String
+  lastName: String
+  email: String
+  password: String
+  role: UserRole
+  id: ID!
 }

@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:16.1
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: backend-challenge
+    networks:
+      - backend-challenge
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - 5050:80
+    networks:
+      - backend-challenge
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.com
+      PGADMIN_DEFAULT_PASSWORD: password
+
+networks:
+  backend-challenge:
+    driver: bridge

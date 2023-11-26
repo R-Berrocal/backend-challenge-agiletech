@@ -8,6 +8,7 @@ import { EnvConfiguration } from './config/env.config';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -25,12 +26,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       url: EnvConfiguration().databaseUrl,
       logging: EnvConfiguration().environment === 'dev',
       autoLoadEntities: true,
-      synchronize: EnvConfiguration().environment === 'dev',
+      // synchronize: EnvConfiguration().environment === 'dev',
     }),
+    UsersModule,
   ],
   providers: [AppResolver, AppService],
 })
