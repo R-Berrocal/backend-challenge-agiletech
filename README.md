@@ -37,8 +37,8 @@ login user:
 Equipment:
 
 create equipment admin:
-![Alt text](image.png)
-![Alt text](image-1.png)
+![Alt text](evidences/image-6.png)
+![Alt text](evidences/image-7.png)
 
 get Equipments and getEquipment:
-![Alt text](image-2.png)
+![Alt text](evidences/image-8.png)
