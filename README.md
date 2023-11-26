@@ -33,3 +33,12 @@ delete user:
 
 login user:
 ![Alt text](evidences/image-5.png)
+
+Equipment:
+
+create equipment admin:
+![Alt text](image.png)
+![Alt text](image-1.png)
+
+get Equipments and getEquipment:
+![Alt text](image-2.png)

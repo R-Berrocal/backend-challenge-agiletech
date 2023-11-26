@@ -36,11 +36,31 @@ type AuthResponse {
   user: User!
 }
 
+type Equipment {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  name: String!
+  description: String
+  category: String
+  stock: Float!
+  imageUrl: String
+}
+
+type EquipmentOutput {
+  error: String
+  ok: Boolean!
+  equipment: Equipment
+}
+
 type Query {
   getHello: String!
   getUsers: [User!]!
   getUser(id: ID!): UserOutput!
   revalidateToken: AuthResponse!
+  getEquipments: [Equipment!]!
+  getEquipment(id: String!): EquipmentOutput!
 }
 
 type Mutation {
@@ -49,6 +69,9 @@ type Mutation {
   removeUser(id: ID!): UserOutput!
   signup(signupInput: SignupInput!): AuthResponse!
   login(loginInput: LoginInput!): AuthResponse!
+  createEquipment(input: CreateEquipmentInput!): EquipmentOutput!
+  updateEquipment(input: UpdateEquipmentInput!): EquipmentOutput!
+  removeEquipment(id: ID!): EquipmentOutput!
 }
 
 input CreateUserInput {
@@ -79,4 +102,21 @@ input SignupInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateEquipmentInput {
+  name: String!
+  description: String
+  category: String
+  stock: Int
+  imageUrl: String!
+}
+
+input UpdateEquipmentInput {
+  name: String
+  description: String
+  category: String
+  stock: Int
+  imageUrl: String
+  id: ID!
 }

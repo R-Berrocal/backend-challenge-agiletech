@@ -44,12 +44,9 @@ export class UsersService {
     }
   }
 
-  async findOne(id: string): Promise<UserOutput> {
+  async findOneUser(id: string): Promise<UserOutput> {
     try {
-      const user = await this.usersRepository.findOne({ where: { id } });
-      if (!user) {
-        throw new NotFoundException('User not found');
-      }
+      const user = await this.findOne(id);
       return {
         ok: true,
         user,
@@ -73,6 +70,7 @@ export class UsersService {
         10,
       );
     }
+    await this.findOne(id);
     try {
       const user = await this.usersRepository.preload({
         id,
@@ -94,7 +92,7 @@ export class UsersService {
   }
 
   async remove(id: string): Promise<UserOutput> {
-    const { user } = await this.findOne(id);
+    const user = await this.findOne(id);
     try {
       await this.usersRepository.softDelete(id);
       return {
@@ -116,5 +114,15 @@ export class UsersService {
     } catch (error) {
       throw new NotFoundException(`${email} not found`);
     }
+  }
+
+  async findOne(id: string) {
+    const equipment = await this.usersRepository.findOne({
+      where: { id },
+    });
+    if (!equipment) {
+      throw new NotFoundException('Equipment not found');
+    }
+    return equipment;
   }
 }

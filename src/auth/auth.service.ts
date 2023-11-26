@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   async validateUser(id: string): Promise<User> {
-    const { user } = await this.usersService.findOne(id);
+    const user = await this.usersService.findOne(id);
     if (!user) {
       throw new UnauthorizedException(`User is inactive, talk with an admin`);
     }
