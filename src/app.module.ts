@@ -70,7 +70,7 @@ import { UsersService } from './users/users.service';
       url: EnvConfiguration().databaseUrl,
       logging: EnvConfiguration().environment === 'dev',
       autoLoadEntities: true,
-      // synchronize: EnvConfiguration().environment === 'dev',
+      synchronize: EnvConfiguration().environment === 'dev',
     }),
     UsersModule,
     AuthModule,
