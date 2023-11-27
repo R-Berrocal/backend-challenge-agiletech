@@ -75,9 +75,9 @@ type ReportOutput {
 
 type Query {
   getHello: String!
+  revalidateToken: AuthResponse!
   getUsers: [User!]!
   getUser(id: ID!): UserOutput!
-  revalidateToken: AuthResponse!
   getEquipments: [Equipment!]!
   getEquipment(id: String!): EquipmentOutput!
   getReports: [Report!]!
@@ -85,17 +85,30 @@ type Query {
 }
 
 type Mutation {
+  signup(signupInput: SignupInput!): AuthResponse!
+  login(loginInput: LoginInput!): AuthResponse!
   createUser(input: CreateUserInput!): UserOutput!
   updateUser(input: UpdateUserInput!): UserOutput!
   removeUser(id: ID!): UserOutput!
-  signup(signupInput: SignupInput!): AuthResponse!
-  login(loginInput: LoginInput!): AuthResponse!
   createEquipment(input: CreateEquipmentInput!): EquipmentOutput!
   updateEquipment(input: UpdateEquipmentInput!): EquipmentOutput!
   removeEquipment(id: ID!): EquipmentOutput!
   createReport(input: CreateReportInput!): ReportOutput!
   updateReport(updateReportInput: UpdateReportInput!): ReportOutput!
   removeReport(id: ID!): ReportOutput!
+}
+
+input SignupInput {
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: UserRole
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 input CreateUserInput {
@@ -113,19 +126,6 @@ input UpdateUserInput {
   password: String
   role: UserRole
   id: ID!
-}
-
-input SignupInput {
-  name: String!
-  lastName: String!
-  email: String!
-  password: String!
-  role: UserRole
-}
-
-input LoginInput {
-  email: String!
-  password: String!
 }
 
 input CreateEquipmentInput {
@@ -158,4 +158,8 @@ input UpdateReportInput {
   equipmentId: String
   userId: String
   id: ID!
+}
+
+type Subscription {
+  reportAdded: Report!
 }

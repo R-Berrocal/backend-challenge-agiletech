@@ -6,12 +6,15 @@
 
 Sigue estos pasos para levantar el proyecto:
 
-**Paso 1: correr el docker compose con el siguiente comando:**
+
+**Paso 1: renombrar el archivo .env.example a .env:**
+
+**Paso 2: correr el docker compose con el siguiente comando:**
 ```
 docker compose up --build
 ```
 
-**Paso 2: Abre tu navegador web y ve a la siguiente URL: `http://localhost:3000/graphql`**
+**Paso 3: Abre tu navegador web y ve a la siguiente URL: `http://localhost:3000/graphql`**
 
 ¡Listo! Ahora deberías poder acceder a la prueba tecnica agiletech.
 
@@ -53,3 +56,6 @@ create report only admins and technicians:
 ![Alt text](evidences/image-9.png)
 get Report only admins and technicians:
 ![Alt text](evidences/image-10.png)
+subscriptions admins reports:
+![Alt text](evidences/image-11.png)
+![Alt text](evidences/image-12.png)
