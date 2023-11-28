@@ -46,7 +46,7 @@ export class ReportsService {
   async findAll(): Promise<Report[]> {
     try {
       return await this.reportRepository.find({
-        relations: ['user, equipment'],
+        relations: ['user', 'equipment'],
       });
     } catch (error) {
       this.logger.error(error);
