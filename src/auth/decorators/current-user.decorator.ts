@@ -9,7 +9,6 @@ import { User } from 'src/users/entities/user.entity';
 export const CurrentUser = createParamDecorator(
   (data: string, context: ExecutionContext) => {
     const ctx = GqlExecutionContext.create(context);
-    console.log(ctx.getContext());
     const user: User = ctx.getContext().req.user;
     if (!user)
       throw new InternalServerErrorException('User not found (request)');
