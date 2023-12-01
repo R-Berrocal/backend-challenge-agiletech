@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { JwtService } from '@nestjs/jwt';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import * as Joi from 'joi';
 import { EnvConfiguration } from './config/env.config';
 import { AppResolver } from './app.resolver';
@@ -33,6 +34,8 @@ import { UsersService } from './users/users.service';
       inject: [JwtService, UsersService],
       useFactory: (jwtService: JwtService, usersService: UsersService) => ({
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        playground: false,
+        plugins: [ApolloServerPluginLandingPageLocalDefault()],
         subscriptions: {
           'subscriptions-transport-ws': {
             path: '/graphql',
